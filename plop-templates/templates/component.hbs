@@ -1,0 +1,18 @@
+<template>
+  <div class="{{ pascalCase2Line componentName }}">
+    {{componentName}} component
+  </div>
+</template>
+
+<script setup lang="ts">
+
+const props = defineProps({
+  // ...定义你的 props
+});
+const { emit } = defineEmits(['someEvent']);
+
+</script>
+
+<style lang="scss" scoped>
+.{{ pascalCase2Line componentName }} {}
+</style>

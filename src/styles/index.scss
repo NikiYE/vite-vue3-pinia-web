@@ -1,0 +1,13 @@
+@use 'reset.scss' ;
+@use 'common.scss' ;
+@use 'variable.scss' ;
+
+
+html, body {
+  height: 100%;
+}
+#app{
+  height: 100%;
+  overflow: hidden;
+  color: #414042;
+}

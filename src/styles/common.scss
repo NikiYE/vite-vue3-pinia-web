@@ -1,0 +1,13 @@
+/*
+  作用: 提高样式代码复用，减少样式代码
+  代码: 项目的一些公共样式
+*/
+html{
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
