@@ -1,4 +1,14 @@
-<template>
+<template>  
+  <Header>
+    <!-- 这里可以放置任何自定义内容 -->
+    <template v-slot:left>
+      <!-- 搜索框后 -->
+    </template>
+    <template #default>
+      <!-- 右边按钮 -->
+      <zj-button>按钮</zj-button>
+    </template>
+  </Header>
   <div style="padding: 30px;">
   <h1>{{ msg }}</h1>
   <h1>按钮</h1>
@@ -23,6 +33,8 @@
   </zj-button>
 <hr>
   <h1>标签</h1>
+  <zj-tag>测试</zj-tag>
+  <zj-tag type="primary">测试</zj-tag>
 <hr>
   <h1>图标</h1>
   <svg class="icon icon-bg" aria-hidden="true">
@@ -61,16 +73,22 @@
   </div>
 
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, shallowRef, onMounted, onBeforeUnmount } from 'vue';
+import '@wangeditor/editor/dist/css/style.css';
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+import { useLoading } from '~/utils/useLoading';
+const loading = useLoading();
+
+// 直接调用方法loading
+loading.show();
+// ...
+// loading.hide();
 
 defineProps({
   msg: String,
 })
 
-
-import '@wangeditor/editor/dist/css/style.css';
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 
 // 编辑器实例，必须用 shallowRef
 const editorRef = shallowRef();

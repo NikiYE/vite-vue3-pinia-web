@@ -12,7 +12,7 @@
       <div class="menu_wrap">
         <div v-for="item in menuItems" 
         :key="item.text" 
-        class="menu_item"
+        :class="{'menu_item':true, 'actived': activeItem === item.link}"
         @click="linkTo(item.link)"
         >
             <svg class="icon" aria-hidden="true">
@@ -28,10 +28,10 @@
       </router-link>
       <div v-else>
         <div class="flex" >
-          <el-avatar :size="60" :src="userAvatarUrl" />
+          <img class="avatar" :src="userAvatarUrl" />
           <div class="name_box">
             <p class="name">{{ userName || "用户" }}</p>
-            <span>{{ userId || "没有id" }}</span>
+            <span class="id">{{ userId || "没有id" }}</span>
           </div>
         </div>
         <div class="flex name_opr">
@@ -60,14 +60,18 @@ const store: any = useAuthStore();
 const navigationStore = useNavigationStore();
 const isCollapsed = ref(false);
 
+const activeItem = ref('/'); // 存储当前激活项的状态
+
 const menuItems = [
   { icon: 'icon-shujia', text: '志鉴书库',link:'/book/booklist' },
   { icon: 'icon-shouye', text: '工作台' ,link:'/'},
-  { icon: 'icon-mofabi', text: '智能助手' ,link:'/'},
+  { icon: 'icon-mofabi', text: '智能助手' ,link:'/test'},
   // 更多菜单项...
 ];
 const linkTo = (link) =>{
+  console.log(link);
   router.push(link)
+  activeItem.value = link; // 更新当前激活项
 }
 const toggleCollapse = () => {
   isCollapsed.value = !isCollapsed.value;
@@ -90,13 +94,7 @@ const state = reactive({
 const { userAvatarUrl } = toRefs(state)
 
 
-const clickout = (key: string, keyPath: string[]) => {
-  console.log(key == '1-1', keyPath)
-  if (key == '1-1') {
-    console.log("去个人信息页")
-    router.push("/userinfo")
-  }
-}
+
 
 const logout = () => {
   localStorage.removeItem("token");
@@ -117,19 +115,25 @@ const logout = () => {
   padding: 0;
 }
 .user_box{
-  width: 220px;
+  width: 200px;
   height: 150px;
   background-color: #fff;
   box-shadow: var(--shadow-light);
   border-radius: 10px;
   margin: 0 auto;
-  padding: 24px;
-  margin-bottom: 40px;
-  transition: var(--transition);
+  padding: 25px 20px 10px;
+  margin-bottom: 25px;
+  transition: var( --transition);
+  &:hover{
+    box-shadow: var(--shadow);
+  }
   .name_box{
     transition: var(--transition);
     margin-left: 15px;
     color: #bababa;
+  }
+  .id{
+    font-size: 12px;
   }
   .name_opr{
     transition: var(--transition);
@@ -138,17 +142,23 @@ const logout = () => {
   }
   .name{
     line-height: 22px;
-    margin-top: 10px;
+    margin-top: 4px;
     font-size: 18px;
     color: var(--color-deeper)
+  }
+  .avatar{
+    transition: var(--transition-width),var(--transition-height);
+    display: inline-block;
+    width: 50px;
+    height: 50px;
   }
 }
 .logo_wrap{
   height: 65px;
-  width: 301px;
+  width: 249px;
   background: #fff;
   border-bottom: 1px solid var(--color-lighter);
-  padding: 10px 30px 10px 42px;
+  padding: 7px 30px 10px 42px;
   transition: var(--transition);
   overflow: hidden;
   img{
@@ -165,21 +175,26 @@ const logout = () => {
   z-index: 500;
   position: relative;
   height: 100%;
-  width: 300px;
-  transition: var(--transition);
+  width: 250px;
+  transition: var(--transition-width);
   border-right: var(--color-lighter) 1px solid ;
 }
 
-.is-collapsed {
-  width: 70px;
-}
 
 .menu_item {
   display: flex;
   align-items: center;
   padding: 15px;
   transition: background-color 0.3s;
-  &:hover {
+  .icon {
+    display: block;
+    text-align: center;
+    padding: 9px;
+    border-radius: 10px;
+    width:55px;
+    height: 40px;
+  }
+  &:hover,&.actived {
     cursor: pointer;
     .icon{
       color: #fff;
@@ -196,23 +211,15 @@ const logout = () => {
       background-clip: border-box;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: bolder;
     }
   }
-}
-.icon {
-  display: block;
-  text-align: center;
-  padding: 8px;
-  border-radius: 10px;
-  font-size: 40px;
 }
 .menu_wrap{
   padding: 10px 25px;
   transition: var(--transition-padding); /* 添加宽度变化的过渡效果 */
 }
 .text {
-  transition: var(--transition); 
+  transition: var(--transition-width); 
   white-space: nowrap;
   overflow: hidden; /* 防止文本溢出 */
   width: 170px; /* 文本的初始宽度 */
@@ -221,6 +228,7 @@ const logout = () => {
 }
 
 .is-collapsed {
+  width: 70px;
   .text {
     width: 0;
     margin-left: 0;
@@ -229,17 +237,19 @@ const logout = () => {
     padding: 10px 0;
   }
   .logo_wrap{
-    width: 69px;
+    width: 70px;
     padding: 5px 18px;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #fff;  
+    border-right: 1px solid var(--color-lighter);
   }
   .user_box{
     width: 60px;
     height: 60px;
     padding: 10px;
     box-shadow: none;
-    .el-avatar{
-      --el-avatar-size: 40px!important;
+    .avatar{
+      width: 40px;
+      height: 40px;
     }
     .name_opr,.name_box{ display: none; width: 0;}
   }

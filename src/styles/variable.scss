@@ -15,48 +15,12 @@
   --color-gradient: linear-gradient(45deg, #b896ff -13.08%, #87dbff 82.12%);
   --transition-padding: padding 0.3s;
   --transition: all 0.3s ease;
+  --transition-bg: background-color 0.3s ease;
+  --transition-color: color 0.3s ease;
+  --transition-width: width 0.3s ease;
+  --transition-height: width 0.3s ease;
+  --transition-padding: padding 0.3s ease;
+  --transition-margin: margin 0.3s ease;
   --shadow: 0px 0px 30px rgba(138, 122, 215, 0.45);
   --shadow-light: 0px 0px 30px rgba(138, 122, 215, 0.15);
 }
-
-// 下面是element-plus的主题覆盖
-$--font-size: (
-  (
-    'extra-large': 21px,
-    'large': 19px,
-    'medium': 17px,
-    'base': 15px,
-    'small': 14px,
-    'extra-small': 12px,
-  )
-);
-$--colors: (
-  "primary": (
-    "base": #212529 ,
-  ),
-  "success": (
-    "base": #7BA23F,
-  ),
-  "warning": (
-    "base": #ff8800,
-  ),
-  "danger": (
-    "base": #a30303,
-  ),
-  "error": (
-    "base": #Fed71a,
-  ),
-  "info": (
-    "base": #777,
-  ),
-);
-
-// @forward "element-plus/theme-chalk/src/common/var.scss" with (
-//   // do not use same name, it will override.
-//   $font-size: $--font-size, 
-//   $colors: $--colors,
-
-// );
-
-
-
