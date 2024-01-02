@@ -55,6 +55,11 @@
   <svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-bianji"></use>
   </svg>
+  <h1>骨架屏</h1>
+  <div class="item">
+    <template v-if="content">{{ content }}</template>
+    <Skeleton v-else />
+  </div>
   <h1>富文本编辑器</h1>
   <div style="border: 1px solid #ccc">
       <Toolbar
@@ -77,14 +82,25 @@
 import { ref, shallowRef, onMounted, onBeforeUnmount } from 'vue';
 import '@wangeditor/editor/dist/css/style.css';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+
+
 import { useLoading } from '~/utils/useLoading';
-const loading = useLoading();
 
-// 直接调用方法loading
-loading.show();
-// ...
-// loading.hide();
+const fullScreenLoading = useLoading();
+fullScreenLoading.show('自定义加载中...'); // 调用 show 方法并传入自定义文本
 
+// fullScreenLoading.hide();
+
+// 骨架屏
+const data = {
+  1:"hehe",
+  2:"jaja"
+}
+
+const content = ref("")
+setTimeout(() =>{
+  content.value = "hello world"
+},3000)
 defineProps({
   msg: String,
 })
@@ -133,6 +149,11 @@ const handleCreated = (editor) => {
   background-clip: border-box;
   -webkit-background-clip: border-box;
   -webkit-text-fill-color: transparent;
+}
+.item{
+  font-size: 16px;
+  height: 50px;
+  width: 100%;
 }
 
 </style>

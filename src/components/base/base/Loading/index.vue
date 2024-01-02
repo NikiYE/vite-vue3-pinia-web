@@ -10,6 +10,14 @@
 <script setup lang="ts">
 import { ref,watchEffect } from "vue";
 
+// 使用
+// import { useLoading } from '~/utils/useLoading';
+// const fullScreenLoading = useLoading();
+
+// fullScreenLoading.show("发送中");
+// fullScreenLoading.hide();
+
+
 const props = defineProps({
   text: {
     type: String

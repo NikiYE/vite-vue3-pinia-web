@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: () => import("../views/Home.vue"),
     children:[
-      // append new router
+// append new router
       ...helloRouter,
     ]
   },

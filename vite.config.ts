@@ -31,7 +31,7 @@ export default defineConfig({
     }
   },
   server: {
-    host: '0.0.0.0', // 允许局域网访问
+    // host: '0.0.0.0', // 允许局域网访问
     proxy: {
       // '/api': {
       //   target: 'http://192.168.1.9:9090/zjdsj',  //  java 7:后端电脑本地/9 这里是你的后端服务器地址

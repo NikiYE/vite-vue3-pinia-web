@@ -2,7 +2,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import {createPinia} from 'pinia'
+
 import Loading from './components/base/Loading'
+
+import Skeleton from 'vue-loading-skeleton';
+import "vue-loading-skeleton/dist/style.css"
 
 // import VueLazyload from 'vue3-lazyload'
 
@@ -26,7 +30,8 @@ console.log(' VITE_API_URL: ',  import.meta.env.VITE_API_URL);
 //   error: errorImage       // 加载失败时的占位图
 // })
 
-app.use(Loading);
+app.use(Skeleton)
+app.use(Loading)
 app.use(router)
 app.use(createPinia())
 app.mount('#app')
